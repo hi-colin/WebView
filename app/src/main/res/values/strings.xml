@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">WebView</string>
+
+    <string name="txt_home">首页</string>
+    <string name="txt_center">中心</string>
+    <string name="txt_mine">我的</string>
+
+    <string name="press_again_to_exit">再按一次退出程序</string>
 </resources>
