@@ -82,7 +82,7 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
 
             webView.setWebChromeClient(new WebChromeClient());
             webView.addJavascriptInterface(this, "app");
-            webView.requestFocus(View.FOCUS_DOWN);
+            webView.requestFocus(View.FOCUS_DOWN); // 解决 <textarea> 无法聚焦
             webView.loadUrl(url);
         }
     }
