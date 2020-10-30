@@ -67,7 +67,10 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
                     } else {
                         // 示例URL
                         if (url.contains("file_upload")) {
-//                            intent.setClass(getApplicationContext(), FileUploadActivity.class);
+                            intent.setClass(getApplicationContext(), FileUploadActivity.class);
+                        }
+                        else if (url.contains("video")) {
+                            intent.setClass(getApplicationContext(), VideoActivity.class);
                         }
                         else {
                             intent.setClass(getApplicationContext(), WebViewActivity.class);

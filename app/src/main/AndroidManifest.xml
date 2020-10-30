@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.VideoActivity">
+        </activity>
         <activity android:name=".activities.FileUploadActivity">
         </activity>
         <activity android:name=".activities.WebViewActivity">
