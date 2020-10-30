@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import cn.hicolin.webview.R;
+import cn.hicolin.webview.activities.WebViewActivity;
 import cn.hicolin.webview.utils.WebViewUtils;
 
 public abstract class WebViewFragment extends Fragment implements View.OnClickListener {
@@ -41,8 +42,7 @@ public abstract class WebViewFragment extends Fragment implements View.OnClickLi
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
-//                return urlLoading(view, url);
+                return urlLoading(view, url);
             }
         });
         webView.setWebChromeClient(new WebChromeClient());
@@ -59,7 +59,7 @@ public abstract class WebViewFragment extends Fragment implements View.OnClickLi
     public boolean urlLoading(WebView view, String url) {
         if (getActivity() != null) {
             Intent intent = new Intent();
-//            intent.setClass(getActivity(), WebViewActivity.class);
+            intent.setClass(getActivity(), WebViewActivity.class);
             intent.putExtra("url", url);
             startActivity(intent);
         }
