@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.GeolocationPermissions;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -51,6 +52,12 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
             webView.getSettings().setJavaScriptEnabled(true);
             WebViewUtils.setLocalStorageEnable(this, webView);
 
+            // 定位相关
+            webView.getSettings().setGeolocationDatabasePath(this.getFilesDir().getPath());
+            webView.getSettings().setDatabaseEnabled(true);
+            webView.getSettings().setGeolocationEnabled(true);
+            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 WebView.setWebContentsDebuggingEnabled(true);
             }
@@ -83,7 +90,13 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
                 }
             });
 
-            webView.setWebChromeClient(new WebChromeClient());
+            webView.setWebChromeClient(new WebChromeClient() {
+                @Override
+                public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                    callback.invoke(origin, true, false);
+                    super.onGeolocationPermissionsShowPrompt(origin, callback);
+                }
+            });
             webView.addJavascriptInterface(this, "app");
             webView.requestFocus(View.FOCUS_DOWN); // 解决 <textarea> 无法聚焦
             webView.loadUrl(url);
