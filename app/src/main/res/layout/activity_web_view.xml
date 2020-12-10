@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     tools:context=".activities.WebViewActivity">
 
@@ -57,13 +58,31 @@
         android:layout_below="@id/top_bar"
         />
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/loading"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/top_bar"
-        >
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
 
-    </FrameLayout>
+        <com.zyao89.view.zloading.ZLoadingView
+            android:id="@+id/loading_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:z_type="StarBuilder"
+            app:z_color="@color/colorAccent" />
+
+        <com.zyao89.view.zloading.ZLoadingTextView
+            android:id="@+id/loading_text"
+            android:layout_below="@id/loading_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:z_text="Loading..."
+            app:z_color="@color/colorAccent"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

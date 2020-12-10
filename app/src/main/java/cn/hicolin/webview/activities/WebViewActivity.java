@@ -24,8 +24,9 @@ import cn.hicolin.webview.utils.WebViewUtils;
 
 public class WebViewActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView mTitle;
-    private WebView webView;
+    public TextView mTitle;
+    public RelativeLayout mLoading;
+    public WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
     private void bindView() {
         RelativeLayout back = findViewById(R.id.back);
         mTitle = findViewById(R.id.top_bar_title);
+        mLoading = findViewById(R.id.loading);
         webView = findViewById(R.id.web_view);
 
         back.setOnClickListener(this);
@@ -87,6 +89,13 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
 
                     startActivity(intent);
                     return true;
+                }
+
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(view, url);
+
+                    mLoading.setVisibility(View.INVISIBLE);
                 }
             });
 

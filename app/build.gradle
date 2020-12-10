@@ -46,4 +46,5 @@ dependencies {
     implementation 'com.squareup.okio:okio:2.7.0'
     implementation 'com.squareup.okhttp3:okhttp:4.8.1'
 
+    implementation 'com.zyao89:zloading:1.2.0'
 }

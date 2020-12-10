@@ -11,6 +11,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import cn.hicolin.webview.utils.WebViewUtils;
 public abstract class WebViewFragment extends Fragment implements View.OnClickListener {
 
     public WebView webView;
+    public RelativeLayout mLoading;
 
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     @Nullable
@@ -31,6 +33,7 @@ public abstract class WebViewFragment extends Fragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_web_view, container, false);
 
         webView = view.findViewById(R.id.web_view);
+        mLoading = view.findViewById(R.id.loading);
 
         webView.getSettings().setJavaScriptEnabled(true);
         if (getActivity() != null) {
@@ -39,12 +42,21 @@ public abstract class WebViewFragment extends Fragment implements View.OnClickLi
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
+
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return urlLoading(view, url);
             }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+
+                mLoading.setVisibility(View.INVISIBLE);
+            }
         });
+
         webView.setWebChromeClient(new WebChromeClient());
         webView.requestFocus(View.FOCUS_DOWN);
         webView.addJavascriptInterface(this, "app");
