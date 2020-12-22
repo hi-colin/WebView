@@ -50,7 +50,7 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
         RelativeLayout back = findViewById(R.id.back);
         webView = findViewById(R.id.web_view);
         mTitle = findViewById(R.id.top_bar_title);
-        final FrameLayout loading = findViewById(R.id.loading);
+        final RelativeLayout loading = findViewById(R.id.loading);
 
         back.setOnClickListener(this);
 
@@ -107,7 +107,9 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        // 设置横屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         FrameLayout decor = (FrameLayout) getWindow().getDecorView();
         fullscreenContainer = new VideoActivity.FullscreenHolder(getApplicationContext());
         fullscreenContainer.addView(view, COVER_SCREEN_PARAMS);
